@@ -1,32 +1,38 @@
 import React, { useState } from "react";
+import InputField from "../Components/inputfield";
 
 function ComListRow({ species }) {
   const [displayDetails, setDisplayDetails] = useState(false);
   const [details, setDetails] = useState({});
 
   const fetchDetailsData = async (id) => {
-    const response = await fetch(`http://localhost:8080/api/species/${id}`);
-    const data = await response.json();
-    if (!response.ok) {
-      console.log(`Error: ${response.status}`);
+    if (id !== undefined) {
+      const response = await fetch(`http://localhost:8080/api/species/${id}`);
+      const data = await response.json();
+      if (!response.ok) {
+        console.log(`Error: ${response.status}`);
+      }
+      setDetails(data);
     }
-    setDetails(data);
   };
 
   const showDetails = (e) => {
-    setDisplayDetails(true, fetchDetailsData(species.parent));
+    setDisplayDetails(
+      (displayDetails) => !displayDetails,
+      fetchDetailsData(species.parent)
+    );
   };
 
   return (
     <div onClick={showDetails}>
       {displayDetails === true
-        ? species.name +
-          "," +
-          details.name +
+        ? +"," +
+          (details.name === undefined ? "No parent" : details.name) +
           "," +
           species.extinct.toString() +
           "," +
-          species._id
+          species._id +
+          <InputField />
         : species.name}
     </div>
   );
