@@ -7,7 +7,7 @@ const SpeciesSchema = new Schema({
   name: String,
   extinct: Boolean,
   _id: Number,
-  parent: { type: mongoose.SchemaTypes.ObjectId, ref: "Species" },
+  parent: Number,
   confidence: String,
 });
 

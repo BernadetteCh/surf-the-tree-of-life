@@ -1,9 +1,7 @@
 const { Router } = require("express");
 const { db, create } = require("../db/species.model");
 const SpeciesModel = require("../db/species.model");
-const ReferenceModel = require("../db/reference.model.");
 const speciesRouter = new Router();
-//
 
 speciesRouter.get("/", async (req, res) => {
   const species = await SpeciesModel.find().limit(50).sort({ created: "asc" });
@@ -18,8 +16,10 @@ speciesRouter.post("/search", async (req, res) => {
 });
 
 speciesRouter.get("/:id", async (req, res) => {
-  const user = await SpeciesModel.findById(req.params.id);
-  console.log(user);
+  await SpeciesModel.findById(req.params.id).then((result) => {
+    res.json(result);
+  });
+  // console.log(user);
   // let model = await SpeciesModel.findById(req.params.id);
   // let obj = await SpeciesModel.findById(req.params.id).then((result) => {
   //   console.log(result.parent);

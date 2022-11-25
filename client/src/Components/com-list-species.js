@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+import ComListRow from "./com-list-row";
 
-function ComListSpecies({ species, fetchDetails }) {
+function ComListSpecies({ species }) {
   const listRender = (list) => {
     return list ? (
       list.map((item, index) => {
         return (
-          <li
-            key={index}
-            onClick={() => {
-              fetchDetails(item._id);
-            }}
-          >
-            {item.name}
+          <li key={index}>
+            <ComListRow species={item} />
           </li>
         );
       })
