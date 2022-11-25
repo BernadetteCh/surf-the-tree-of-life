@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-const listRender = (list) => {
-	return list ? (
-		list.map((item, index) => {
-			return <li key={index}>{item.name}</li>;
-		})
-	) : (
-		<p> loading</p>
-	);
-};
+function ComListSpecies({ species, fetchDetails }) {
+  const listRender = (list) => {
+    return list ? (
+      list.map((item, index) => {
+        return (
+          <li
+            key={index}
+            onClick={() => {
+              fetchDetails(item._id);
+            }}
+          >
+            {item.name}
+          </li>
+        );
+      })
+    ) : (
+      <p> loading</p>
+    );
+  };
 
-const ComListSpecies = ({ species }) => {
-	return <div>{listRender(species)}</div>;
-};
+  return <div>{listRender(species)}</div>;
+}
 
 export default ComListSpecies;

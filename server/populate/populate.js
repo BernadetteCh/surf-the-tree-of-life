@@ -9,6 +9,7 @@ const speciesModel = require("../db/species.model");
 console.log(process.env.MONGO_URL);
 //coonnection
 const mongoUrl = process.env.MONGO_URL;
+console.log(mongoUrl);
 
 if (!mongoUrl) {
   console.error("Missing MONGO_URL environment variable");
