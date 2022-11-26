@@ -45,16 +45,6 @@ const PageHome = () => {
     setSearch(e.target.value);
   };
 
-  // const fetchDetailsData = async (id) => {
-  //   const response = await fetch(`http://localhost:8000/api/species/${id}`);
-  //   const data = await response.json();
-  //   if (!response.ok) {
-  //     console.log(`Error: ${response.status}`);
-  //   }
-
-  //   setDisplayDetails(true, setDetails(data));
-  // };
-
   return (
     <div>
       <h1>Welcome to Tree Of Life Project</h1>

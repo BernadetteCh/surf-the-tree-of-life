@@ -7,6 +7,7 @@ speciesRouter.get("/", async (req, res) => {
   const species = await SpeciesModel.find().limit(50).sort({ created: "asc" });
   return res.json(species);
 });
+
 speciesRouter.post("/search", async (req, res) => {
   await SpeciesModel.find({ name: { $regex: req.body.search } })
     .limit(50)

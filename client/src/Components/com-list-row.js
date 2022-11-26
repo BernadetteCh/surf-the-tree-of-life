@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import InputField from "../Components/inputfield";
 
 function ComListRow({ species }) {
   const [displayDetails, setDisplayDetails] = useState(false);
@@ -24,7 +23,7 @@ function ComListRow({ species }) {
     );
   };
 
-  const sayHi = (e) => {
+  const saveInput = (e) => {
     setComment((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
@@ -65,12 +64,13 @@ function ComListRow({ species }) {
           placeholder={comment.comment}
           autoFocus
           name="comment"
-          onChange={sayHi}
+          onChange={saveInput}
         ></input>
         <button onClick={sendComment}>Add comment</button>
       </div>
     );
   };
+
   return (
     <div onClick={showDetails}>
       {displayDetails === true ? showSpeciesDetails() : species.name}
