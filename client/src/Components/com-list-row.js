@@ -22,18 +22,32 @@ function ComListRow({ species }) {
       fetchDetailsData(species.parent)
     );
   };
-
+  const sayHi = () => {
+    console.log("Hi");
+  };
+  const showSpeciesDetails = () => {
+    return (
+      <div>
+        {details.name === undefined
+          ? "No parent"
+          : "Parent is :" +
+            details.name +
+            "," +
+            species.extinct.toString() +
+            "," +
+            species._id}
+        <input
+          type="textarea"
+          placeholder="add information to species"
+          autoFocus
+          onChange={sayHi}
+        ></input>
+      </div>
+    );
+  };
   return (
     <div onClick={showDetails}>
-      {displayDetails === true
-        ? +"," +
-          (details.name === undefined ? "No parent" : details.name) +
-          "," +
-          species.extinct.toString() +
-          "," +
-          species._id +
-          <InputField />
-        : species.name}
+      {displayDetails === true ? showSpeciesDetails() : species.name}
     </div>
   );
 }
