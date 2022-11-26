@@ -4,6 +4,7 @@ import InputField from "../Components/inputfield";
 function ComListRow({ species }) {
   const [displayDetails, setDisplayDetails] = useState(false);
   const [details, setDetails] = useState({});
+  const [comment, setComment] = useState({ comment: "" });
 
   const fetchDetailsData = async (id) => {
     if (id !== undefined) {
@@ -22,8 +23,30 @@ function ComListRow({ species }) {
       fetchDetailsData(species.parent)
     );
   };
-  const sayHi = () => {
-    console.log("Hi");
+
+  const sayHi = (e) => {
+    setComment((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const sendComment = async () => {
+    const id = species._id;
+    const response = await fetch(
+      `http://localhost:8080/api/species/comment/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          comment,
+        }),
+      }
+    );
+    if (!response.ok) {
+      console.log(`Error: ${response.status}`);
+    }
   };
   const showSpeciesDetails = () => {
     return (
@@ -40,8 +63,10 @@ function ComListRow({ species }) {
           type="textarea"
           placeholder="add information to species"
           autoFocus
+          name="comment"
           onChange={sayHi}
         ></input>
+        <button onClick={sendComment}>Add comment</button>
       </div>
     );
   };

@@ -15,29 +15,21 @@ speciesRouter.post("/search", async (req, res) => {
     });
 });
 
+speciesRouter.post("/comment/:id", async (req, res) => {
+  //multi true update all !
+  const id = parseInt(req.params.id);
+  const newSpecies = await SpeciesModel.updateOne(
+    { _id: id },
+    { $set: { comment: req.body.comment.comment } },
+    { multi: true }
+  );
+  res.json(newSpecies);
+});
+
 speciesRouter.get("/:id", async (req, res) => {
   await SpeciesModel.findById(req.params.id).then((result) => {
     res.json(result);
   });
-  // console.log(user);
-  // let model = await SpeciesModel.findById(req.params.id);
-  // let obj = await SpeciesModel.findById(req.params.id).then((result) => {
-  //   console.log(result.parent);
-  //   return (result.parent = SpeciesModel.findById(result.parent));
-  // });
-
-  // model.parent = obj;
-  // console.log(model);
-  // SpeciesModel.findById(req.params.id)
-  // .then((result) => {
-  //   return result.populate("parent");
-  // });
-
-  //  console.log((result.parentObject = 2));
-
-  // SpeciesModel.find({ _id: result.parent }).then((result) => {
-  //   console.log(result);
-  // });
 });
 
 module.exports = speciesRouter;

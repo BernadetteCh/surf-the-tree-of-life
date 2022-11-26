@@ -9,6 +9,7 @@ const SpeciesSchema = new Schema({
   _id: Number,
   parent: Number,
   confidence: String,
+  comment: String,
 });
 
 module.exports = mongoose.model("Species", SpeciesSchema);
