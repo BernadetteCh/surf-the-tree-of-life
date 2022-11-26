@@ -56,8 +56,6 @@ const PageHome = () => {
   //   setDisplayDetails(true, setDetails(data));
   // };
 
-  console.log(species);
-
   return (
     <div>
       <h1>Welcome to Tree Of Life Project</h1>

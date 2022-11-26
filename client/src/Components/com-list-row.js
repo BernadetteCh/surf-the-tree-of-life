@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputField from "../Components/inputfield";
+// import InputField from "../Components/inputfield";
 
 function ComListRow({ species }) {
   const [displayDetails, setDisplayDetails] = useState(false);
@@ -47,6 +47,7 @@ function ComListRow({ species }) {
     if (!response.ok) {
       console.log(`Error: ${response.status}`);
     }
+    console.log(comment);
   };
   const showSpeciesDetails = () => {
     return (
@@ -61,7 +62,7 @@ function ComListRow({ species }) {
             species._id}
         <input
           type="textarea"
-          placeholder="add information to species"
+          placeholder={comment.comment}
           autoFocus
           name="comment"
           onChange={sayHi}
