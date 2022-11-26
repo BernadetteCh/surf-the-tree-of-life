@@ -35,7 +35,7 @@ function ComListRow({ species }) {
     const response = await fetch(
       `http://localhost:8080/api/species/comment/${id}`,
       {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-type": "application/json",
         },

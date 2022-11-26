@@ -15,7 +15,7 @@ speciesRouter.post("/search", async (req, res) => {
     });
 });
 
-speciesRouter.post("/comment/:id", async (req, res) => {
+speciesRouter.patch("/comment/:id", async (req, res) => {
   //multi true update all !
   const id = parseInt(req.params.id);
   const newSpecies = await SpeciesModel.updateOne(
