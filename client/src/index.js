@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import PageHome from "./Pages/page-home";
 import Form from "../src/Components/form";
+import Edit from "../src/Components/edit";
 import reportWebVitals from "./reportWebVitals";
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/form",
     element: <Form></Form>,
+  },
+  {
+    path: "/form/data",
+    element: <Edit></Edit>,
   },
 ]);
 

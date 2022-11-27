@@ -42,6 +42,12 @@ function Form() {
     if (!response.ok) {
       console.log(`Error: ${response.status}`);
     }
+    setInputData({
+      name: "",
+      option: "",
+      date: "",
+      description: "",
+    });
   };
 
   return (

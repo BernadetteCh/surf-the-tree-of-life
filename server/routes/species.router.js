@@ -10,6 +10,16 @@ speciesRouter.get("/", async (req, res) => {
   return res.json(species);
 });
 
+speciesRouter.get("/formdata", async (req, res) => {
+  await FormInput.find({}).then((result) => {
+    res.json(result);
+  });
+});
+
+speciesRouter.delete("/formdata/delete/:id", async (req, res) => {
+  await FormInput.findByIdAndDelete(req.params.id);
+});
+
 speciesRouter.post("/search", async (req, res) => {
   await SpeciesModel.find({ name: { $regex: req.body.search } })
     .limit(50)
