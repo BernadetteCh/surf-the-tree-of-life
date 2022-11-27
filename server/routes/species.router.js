@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const { db, create } = require("../db/species.model");
 const SpeciesModel = require("../db/species.model");
+const FormInput = require("../db/form.model");
 const speciesRouter = new Router();
 
+//sort({ name: "asc" }) wtf?!?
 speciesRouter.get("/", async (req, res) => {
-  const species = await SpeciesModel.find().limit(50).sort({ created: "asc" });
+  const species = await SpeciesModel.find({}).limit(50).sort("asc");
   return res.json(species);
 });
 
@@ -14,6 +16,21 @@ speciesRouter.post("/search", async (req, res) => {
     .then((result) => {
       res.send(result);
     });
+});
+
+speciesRouter.post("/create/post/field", async (req, res) => {
+  const { name, option, date, description } = req.body;
+  let newPost = new FormInput({
+    name: name,
+    option: option,
+    date: date,
+    description: description,
+  });
+  try {
+    await newPost.save();
+  } catch {
+    console.log(e);
+  }
 });
 
 speciesRouter.patch("/comment/:id", async (req, res) => {
