@@ -1,6 +1,6 @@
 import React from "react";
 
-function Table({ data, id, updateInputData }) {
+function Table({ data, id, updateInputData, inputdata }) {
   const deleteInput = async (e) => {
     const response = await fetch(
       `http://localhost:8080/api/species/formdata/delete/${id}`,
@@ -15,7 +15,7 @@ function Table({ data, id, updateInputData }) {
       console.log(`Error${response.status}`);
     }
 
-    const newData = data.filter((dat) => {
+    const newData = inputdata.filter((dat) => {
       if (dat._id !== id) {
         return true;
       } else {

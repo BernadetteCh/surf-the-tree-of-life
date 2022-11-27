@@ -39,6 +39,7 @@ function Edit() {
                 data={data}
                 id={data._id}
                 key={index}
+                inputdata={inputData}
                 updateInputData={updateInputData}
               />
             );

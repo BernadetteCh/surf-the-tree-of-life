@@ -27,7 +27,7 @@ function Form() {
     });
   };
 
-  const saveData = async () => {
+  const saveData = async (e) => {
     const response = await fetch(
       "http://localhost:8080/api/species/create/post/field",
       {
@@ -55,7 +55,12 @@ function Form() {
       <h1>Species Form</h1>
       <form>
         <label>Name:</label>
-        <input name="name" type="text" onChange={saveValue}></input>
+        <input
+          value={inputData.name}
+          name="name"
+          type="text"
+          onChange={saveValue}
+        ></input>
         <br />
         <select name="option" id="record" onChange={saveValue}>
           <option defaultValue="select">Select</option>
@@ -66,9 +71,18 @@ function Form() {
             : console.log("...loading")}
         </select>
         <br />
-        <input name="date" type="date" onChange={saveValue}></input>
+        <input
+          value={inputData.date}
+          name="date"
+          type="date"
+          onChange={saveValue}
+        ></input>
         <br />
-        <textarea name="description" onChange={saveValue}></textarea>
+        <textarea
+          value={inputData.description}
+          name="description"
+          onChange={saveValue}
+        ></textarea>
       </form>
       <button type="submit" onClick={saveData}>
         Save
