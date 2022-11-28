@@ -6,18 +6,21 @@ const speciesRouter = new Router();
 
 //sort({ name: "asc" }) wtf?!?
 speciesRouter.get("/", async (req, res) => {
-  const species = await SpeciesModel.find({}).limit(50).sort("asc");
+  const species = await SpeciesModel.find({}).sort({ name: 1 }).limit(50);
   return res.json(species);
 });
 
 speciesRouter.get("/formdata", async (req, res) => {
   await FormInput.find({}).then((result) => {
-    res.json(result);
+    res.json([...result]);
   });
 });
 
 speciesRouter.delete("/formdata/delete/:id", async (req, res) => {
   await FormInput.findByIdAndDelete(req.params.id);
+  await FormInput.find({}).then((result) => {
+    res.json([...result]);
+  });
 });
 
 speciesRouter.post("/search", async (req, res) => {

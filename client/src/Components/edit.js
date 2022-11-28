@@ -13,11 +13,13 @@ const fetchData = async (dataSetter) => {
 
 function Edit() {
   const [inputData, setInputData] = useState([]);
+
   useEffect(() => {
     fetchData(setInputData);
   }, []);
 
   const updateInputData = (data) => {
+    console.log(data);
     setInputData(data);
   };
   console.log(inputData);

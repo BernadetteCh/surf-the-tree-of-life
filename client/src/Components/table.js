@@ -11,18 +11,23 @@ function Table({ data, id, updateInputData, inputdata }) {
         },
       }
     );
+
     if (!response.ok) {
       console.log(`Error${response.status}`);
+    } else {
+      const newData = await response.json();
+      console.log(newData);
+      updateInputData(newData);
     }
 
-    const newData = inputdata.filter((dat) => {
-      if (dat._id !== id) {
-        return true;
-      } else {
-        return false;
-      }
-    });
-    updateInputData(newData);
+    // const newData = inputdata.filter((dat) => {
+    //   if (dat._id !== id) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // });
+    // updateInputData(newData);
   };
   return (
     <tr>
