@@ -40,7 +40,9 @@ speciesRouter.post("/create/post/field", async (req, res) => {
     description: description,
   });
   try {
-    await newPost.save();
+    await newPost.save().then((result) => {
+      res.status(200).json(result);
+    });
   } catch {
     console.log(e);
   }

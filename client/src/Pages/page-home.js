@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import ComListSpecies from "../Components/com-list-species";
 
 const fetchSpecies = (dataSetter) => {
-  return fetch(`http://localhost:8080/api/species?search=${search}`).then(
-    (res) => res.json().then((data) => dataSetter(data))
+  return fetch(`http://localhost:8080/api/species/`).then((res) =>
+    res.json().then((data) => dataSetter(data))
   );
 };
 
