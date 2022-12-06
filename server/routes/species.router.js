@@ -43,8 +43,7 @@ speciesRouter.post("/search", async (req, res) => {
 
 speciesRouter.post("/create/post/field", async (req, res) => {
   console.log(req.body);
-  const dangerLevel = req.body.dangerLevel;
-  const { name, option, date, description } = req.body.inputData;
+  const { name, option, date, description, dangerLevel } = req.body.inputData;
   let newPost = new FormInput({
     name: name,
     option: option,

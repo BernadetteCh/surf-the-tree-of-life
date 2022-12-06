@@ -25,6 +25,7 @@ function Form() {
     option: "",
     date: "",
     description: "",
+    dangerLevel: "",
   });
   const [dangerLevel, setDangerLevel] = useState("");
 
@@ -39,9 +40,10 @@ function Form() {
       return { ...prev, [e.target.name]: e.target.value };
     });
   };
-  const selectDangerLevel = (e) => {
-    setDangerLevel(e.target.value);
-  };
+  console.log(inputData);
+  // const selectDangerLevel = (e) => {
+  //   setDangerLevel(e.target.value);
+  // };
 
   const saveData = async (e) => {
     const response = await fetch(
@@ -51,7 +53,7 @@ function Form() {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ inputData, dangerLevel: dangerLevel }),
+        body: JSON.stringify({ inputData }),
       }
     );
 
@@ -65,6 +67,7 @@ function Form() {
         option: "",
         date: "",
         description: "",
+        dangerLevel: "",
       });
     }
   };
@@ -97,7 +100,7 @@ function Form() {
             : console.log("...loading")}
         </select>
         <h2>DangerLevels</h2>
-        <select name="dangerLeveloption" onChange={selectDangerLevel}>
+        <select name="dangerLevel" id="dangerLevel" onChange={saveValue}>
           <option defaultValue="select">Select</option>
           {dangerLevelData !== undefined
             ? dangerLevelData.map((dangerLevel) => {
