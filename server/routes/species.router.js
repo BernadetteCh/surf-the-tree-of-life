@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { db, create } = require("../db/species.model");
 const SpeciesModel = require("../db/species.model");
 const FormInput = require("../db/form.model");
+const dangerlevelModel = require("../db/dangerlevel.model");
 const speciesRouter = new Router();
 
 //sort({ name: "asc" }) wtf?!?
@@ -14,6 +15,15 @@ speciesRouter.get("/formdata", async (req, res) => {
   await FormInput.find({}).then((result) => {
     res.json([...result]);
   });
+});
+
+speciesRouter.get("/dangerLevel", async (req, res) => {
+  await dangerlevelModel
+    .find({})
+    .sort({ level: 1 })
+    .then((result) => {
+      res.status(200).json(result);
+    });
 });
 
 speciesRouter.delete("/formdata/delete/:id", async (req, res) => {
@@ -32,12 +42,15 @@ speciesRouter.post("/search", async (req, res) => {
 });
 
 speciesRouter.post("/create/post/field", async (req, res) => {
-  const { name, option, date, description } = req.body;
+  console.log(req.body);
+  const dangerLevel = req.body.dangerLevel;
+  const { name, option, date, description } = req.body.inputData;
   let newPost = new FormInput({
     name: name,
     option: option,
     date: date,
     description: description,
+    dangerLevel: dangerLevel,
   });
   try {
     await newPost.save().then((result) => {

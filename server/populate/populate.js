@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const treeOfLifeGraph = require("./treeoflife.json");
 
 const speciesModel = require("../db/species.model");
+const dangerLevelModel = require("../db/dangerlevel.model");
 
 console.log(process.env.MONGO_URL);
 //coonnection
@@ -18,6 +19,7 @@ if (!mongoUrl) {
 
 const populateSpecies = async () => {
   await speciesModel.deleteMany({});
+  await dangerLevelModel.deleteMany({});
 
   const parentBySpecies = {};
   treeOfLifeGraph.links.forEach((nodeLink) => {
@@ -36,8 +38,17 @@ const populateSpecies = async () => {
     confidence: confidenceById[node.confidence],
   }));
 
+  const dangerLevel = [
+    { name: "not dangerous", level: 1 },
+    { name: "dangerous", level: 2 },
+    { name: "very dangerous", level: 3 },
+    { name: "extremely dangerous", level: 4 },
+  ];
+
   await speciesModel.create(...species);
   console.log("Species created");
+  await dangerLevelModel.create(...dangerLevel);
+  console.log("Level created");
 };
 
 const main = async () => {

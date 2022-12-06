@@ -18,4 +18,17 @@
 <!-- 1) showing all species list with pagination 50 per page with all the specie information in row
 - user click on the species should open a new page and on this page we show the species information including a picture about it taken form wikipedia open api
 - there is a save this image link ref to the database and user can click and iin case the image was proper one he can save the link with to the DB
- -->
+ -- nodemon, jest devdependecy wir können files auch hashen, we can hash anything,  >
+# 3)
+
+- Extend the database so that we can store "dangerLevels" collection. Each document has a name, level and a mongodb generated id.
+  [
+  { "name": "not dangerous", "level": 1 },
+  { "name": "dangerous", "level": 2 },
+  { "name": "very dangerous", "level": 3 },
+  { "name": "extremely dangerous", "level": 4 }
+  ]
+
+- Extend the populate.js file to generate these dangerLevels as separate collection.
+- extend the [task 2](#2) form to have a new input for selecting the dangerLevel. The input should be a dropdown with all the dangerLevels name from the DB sorted by level.
+- extend the [task 2](#2) list page to show the dangerLevel name also in the log row .

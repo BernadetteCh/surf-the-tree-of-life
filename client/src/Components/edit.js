@@ -32,6 +32,7 @@ function Edit() {
             <td>Description:</td>
             <td>Date</td>
             <td>SelectedSpecies</td>
+            <td>DangerLevel</td>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@ function Edit() {
                 key={index}
                 inputdata={inputData}
                 updateInputData={updateInputData}
+                dangerLevel={data.dangerLevel}
               />
             );
           })}

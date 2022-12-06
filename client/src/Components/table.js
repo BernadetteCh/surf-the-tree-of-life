@@ -1,6 +1,6 @@
 import React from "react";
 
-function Table({ data, id, updateInputData, inputdata }) {
+function Table({ data, id, updateInputData, inputdata, dangerLevel }) {
   const deleteInput = async (e) => {
     const response = await fetch(
       `http://localhost:8080/api/species/formdata/delete/${id}`,
@@ -35,6 +35,7 @@ function Table({ data, id, updateInputData, inputdata }) {
       <td>{data.description}</td>
       <td>{data.date}</td>
       <td>{data.option}</td>
+      <td>{dangerLevel}</td>
       <button onClick={deleteInput}>Delete</button>
     </tr>
   );

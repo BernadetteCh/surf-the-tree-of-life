@@ -7,17 +7,30 @@ const fetchSpecies = (dataSetter) => {
   );
 };
 
+const fetchDangerLevels = (dataSetter) => {
+  return fetch("http://localhost:8080/api/species/dangerLevel")
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      dataSetter(data);
+    });
+};
+
 function Form() {
   const [species, setSpecies] = useState();
+  const [dangerLevelData, setDangerLevelData] = useState();
   const [inputData, setInputData] = useState({
     name: "",
     option: "",
     date: "",
     description: "",
   });
+  const [dangerLevel, setDangerLevel] = useState("");
 
   useEffect(() => {
     fetchSpecies(setSpecies);
+    fetchDangerLevels(setDangerLevelData);
   }, []);
 
   const saveValue = (e) => {
@@ -25,6 +38,9 @@ function Form() {
     setInputData((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
+  };
+  const selectDangerLevel = (e) => {
+    setDangerLevel(e.target.value);
   };
 
   const saveData = async (e) => {
@@ -35,7 +51,7 @@ function Form() {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(inputData),
+        body: JSON.stringify({ inputData, dangerLevel: dangerLevel }),
       }
     );
 
@@ -52,7 +68,7 @@ function Form() {
       });
     }
   };
-
+  console.log(dangerLevelData);
   return (
     <div>
       <h1>Species Form</h1>
@@ -69,7 +85,29 @@ function Form() {
           <option defaultValue="select">Select</option>
           {species !== undefined
             ? species.map((species) => {
-                return <Option value={species.name} name={species.name} />;
+                // console.log(species);
+                return (
+                  <Option
+                    value={species.name}
+                    name={species.name}
+                    key={species._id}
+                  />
+                );
+              })
+            : console.log("...loading")}
+        </select>
+        <h2>DangerLevels</h2>
+        <select name="dangerLeveloption" onChange={selectDangerLevel}>
+          <option defaultValue="select">Select</option>
+          {dangerLevelData !== undefined
+            ? dangerLevelData.map((dangerLevel) => {
+                return (
+                  <Option
+                    value={dangerLevel.name}
+                    name={dangerLevel.name}
+                    key={dangerLevel.level}
+                  />
+                );
               })
             : console.log("...loading")}
         </select>

@@ -7,6 +7,7 @@ const formSchema = new Schema({
   option: String,
   date: String,
   description: String,
+  dangerLevel: String,
 });
 
 module.exports = mongoose.model("FormInput", formSchema);
